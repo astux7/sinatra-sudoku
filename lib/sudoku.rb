@@ -16,6 +16,10 @@ class Sudoku
     @cells.map(&:value).join
   end
 
+  def to_original_string
+    @cells.map(&:value).join
+  end
+
 
   # The to_board method creates this board representation for output
   #
