@@ -2,7 +2,18 @@ div.box, div.cell {
   display: inline-block;
 }
 
-div.box
+.border-box{
+  border: 1px solid #000;
+  display: block;
+  font: 0px;
+  width: 276px;
+  margin: auto;
+  margin-bottom: 15px;
+}
+
+div.box{
+  border: 1px solid #000;
+}
 
 .cell input {
   width: 30px;

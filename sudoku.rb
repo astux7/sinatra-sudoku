@@ -147,6 +147,8 @@ end
 
 get '/solution' do
   @current_solution = session[:solution]
+  @solution = session[:solution]
+  @puzzle = session[:puzzle]
   #inspects
   erb :index
 end
