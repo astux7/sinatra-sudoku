@@ -10,7 +10,7 @@ class Puzzle
   def generate_puzzle(type )
     choice = {:easy =>32, :mid=>46, :hard => 51}
     hide_cells(choice[type])
-    format_cells
+   # format_cells
 
   end
 

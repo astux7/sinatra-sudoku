@@ -2,6 +2,8 @@ div.box, div.cell {
   display: inline-block;
 }
 
+div.box
+
 .cell input {
   width: 30px;
   height: 30px;
@@ -21,9 +23,13 @@ body {
 }
 
 .incorrect {
-  background-color: yellow;
+  background-color: red;
 }
 
 .value-provided {
   background-color: #DDD;
+}
+
+#flash {
+  margin: 20px;
 }
