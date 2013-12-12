@@ -1,11 +1,4 @@
-<html>
-<head>
-  <title>Sudoku Game</title>   
-  <!-- link to the CSS stylesheet -->
-  <link href="/stylesheets/application.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-<h1>Life is too short for playing Sudoku</h1>  
+
 <div id="flash">
   <%= flash[:notice] %>
 </div>
@@ -39,8 +32,11 @@
         </div>
       <% end %>
     </div>
-    <button>Check solution</button>
+    <button name="button" value="method_check">Check solution</button>
+    <button name="easy" value="method_easy">Easy sudoku</button>
+    <button name="easy" value="method_hard">Hard sudoku</button>
+    <button name="restart" value="method_restart">Restart</button>
+    <button name="save_start" value="method_save_start">Save game</button>
     </form>
+
   </div>
-</body>
-</html>

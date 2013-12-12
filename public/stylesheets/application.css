@@ -2,7 +2,7 @@ div.box, div.cell {
   display: inline-block;
 }
 
-.border-box{
+.border-box {
   border: 1px solid #000;
   display: block;
   font: 0px;
@@ -11,7 +11,7 @@ div.box, div.cell {
   margin-bottom: 15px;
 }
 
-div.box{
+div.box {
   border: 1px solid #000;
 }
 

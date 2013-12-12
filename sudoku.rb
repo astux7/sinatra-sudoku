@@ -2,9 +2,11 @@ require 'sinatra'
 require 'sinatra/partial'
 require 'rack-flash'
 
+require_relative './helpers/application'
 require_relative './lib/sudoku'
 require_relative './lib/cell'
 require_relative './lib/puzzle'
+
 
 use Rack::Flash
 enable :sessions
@@ -76,29 +78,7 @@ def box_order_to_row_order(cells)
   }
 end
 
-helpers do
 
-
-  def cell_value(value)
-    value.to_i == 0 ? '' : value
-  end
-
-  def colour_class(solution_to_check, puzzle_value, current_solution_value, solution_value)
-    must_be_guessed = puzzle_value == 0
-    #I needed to change this 0 to "0" otherwise all the cells show up as value provided
-    tried_to_guess = current_solution_value.to_i != 0
-    guessed_incorrectly = current_solution_value != solution_value
-
-    if solution_to_check && 
-        must_be_guessed && 
-        tried_to_guess && 
-        guessed_incorrectly
-      'incorrect'
-    elsif !must_be_guessed
-      'value-provided'
-    end
-  end
-end
 
 def generate_new_puzzle_if_necessary
   return if session[:current_solution]
@@ -122,8 +102,7 @@ def puzzle(sudoku)
 end
 
 get '/' do
-
- prepare_to_check_solution
+  prepare_to_check_solution
   generate_new_puzzle_if_necessary
   @current_solution = session[:current_solution] || session[:puzzle]
   @solution = session[:solution]
@@ -131,7 +110,9 @@ get '/' do
   erb :index
 end
 
-
+get '/help' do
+  erb :help
+end
 
 post '/' do
   # the cells in HTML are ordered box by box 
@@ -146,6 +127,7 @@ post '/' do
 end
 
 get '/solution' do
+  redirect to("/") if session[:solution].nil?
   @current_solution = session[:solution]
   @solution = session[:solution]
   @puzzle = session[:puzzle]
