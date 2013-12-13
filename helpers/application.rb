@@ -9,11 +9,6 @@ helpers do
     return ''
   end
 
-  def return_flash(value)
-    flash[:notice] = "Incorrect values are highlighted" if value == true
-    flash[:notice] = "" 
-  end
-
   def colour_class(solution_to_check, puzzle_value, current_solution_value, solution_value)
     must_be_guessed = puzzle_value == 0
     #I needed to change this 0 to "0" otherwise all the cells show up as value provided
@@ -24,13 +19,11 @@ helpers do
         must_be_guessed && 
         tried_to_guess && 
         guessed_incorrectly
-
-      # flash[:notice] = "Incorrect values are highlighted"
       'incorrect'
       
     elsif !must_be_guessed
-     # flash[:notice] = ""
       'value-provided'
+
     end
   end
 end

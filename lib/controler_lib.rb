@@ -45,7 +45,7 @@ module ControlerLibrary
   def prepare_to_check_solution
     @check_solution = session[:check_solution]
     if @check_solution
-      flash[:notice] = "Incorrect values are highlighted"
+     flash[:notice] = "Incorrect values are highlighted"
     else
       flash[:notice] = ""
     end

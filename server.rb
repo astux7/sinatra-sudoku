@@ -15,12 +15,16 @@ set :session_secret, "secure cookie"
 
 include ControlerLibrary
 
+
+
 get '/' do
   type = params.key?("hard") ? :hard : :easy
   reload = params.empty? ? false : true
   show_sudoku_puzzle(type, reload)
   erb :index
 end
+
+
 
 get '/restart' do
    @current_solution = session[:puzzle]
