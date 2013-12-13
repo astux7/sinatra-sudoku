@@ -1,6 +1,6 @@
 
 <div id="flash">
-  <%= flash[:notice] %>
+  <%= flash[:notice] %> <a href="/help" title="help" alt="help"><img id="help" src="/images/help.png" /></a>
 </div>
 <div id="sudoku">
    <form action="/" method="post">
@@ -34,9 +34,10 @@
     </div>
     <button name="button" value="method_check">Check solution</button>
     <button name="easy" value="method_easy">Easy sudoku</button>
-    <button name="easy" value="method_hard">Hard sudoku</button>
-    <button name="restart" value="method_restart">Restart</button>
+    <button name="hard" value="method_hard">Hard sudoku</button>
+    <button name="btn_restart" value="method_restart">Restart</button>
     <button name="save_start" value="method_save_start">Save game</button>
+    <button name="btn_solution" value="method_solution">Solution</button>
     </form>
 
   </div>

@@ -4,6 +4,11 @@ helpers do
     value.to_i == 0 ? '' : value
   end
 
+  def cell_readonly(puzzle_value)
+    return 'readonly' if puzzle_value != 0
+    return ''
+  end
+
   def colour_class(solution_to_check, puzzle_value, current_solution_value, solution_value)
     must_be_guessed = puzzle_value == 0
     #I needed to change this 0 to "0" otherwise all the cells show up as value provided
