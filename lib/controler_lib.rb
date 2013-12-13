@@ -5,6 +5,16 @@ module ControlerLibrary
      session[:current_solution] = cells.map{|value| value.to_i }.join
      session[:check_solution] = true
   end
+
+  def save_solution
+     cells = box_order_to_row_order(params["cell"])  
+     session[:current_solution] = cells.map{|value| value.to_i }.join
+     @current_solution = session[:current_solution] 
+     @solution = session[:solution]
+     @puzzle = session[:puzzle]
+     session[:check_solution] = false
+     redirect to("/")
+  end
   
   def show_solution
     @current_solution = session[:solution]
@@ -12,33 +22,17 @@ module ControlerLibrary
     @puzzle = session[:puzzle]
   end
 
-  def saved?
-    if session[:saved_sudoku].nil?
-      return false
-    else
-    @current_solution = session[:saved_sudoku] 
-     return true
-   end
-  end
-
   def show_sudoku_puzzle(type,reload)
     if reload
     session[:current_solution] = nil
     session[:puzzle] = nil
     session[:solution] = nil
-
     end
     prepare_to_check_solution
-    
     generate_new_puzzle_if_necessary(type)
-    if !saved?
     @current_solution = session[:current_solution] || session[:puzzle]
-  else
-    session[:saved_sudoku] = nil
-    end
     @solution = session[:solution]
     @puzzle = session[:puzzle]
-    
   end
 
   def random_sudoku
@@ -52,13 +46,14 @@ module ControlerLibrary
     @check_solution = session[:check_solution]
     if @check_solution
       flash[:notice] = "Incorrect values are highlighted"
+    else
+      flash[:notice] = ""
     end
     session[:check_solution] = nil
   end
 
   # this method removes some digits from the solution to create a puzzle
   def puzzle(sudoku,type)
-    # this method is yours to implement
     puzz = Puzzle.new(sudoku.dup)
     puzz.generate_puzzle(type)
   end

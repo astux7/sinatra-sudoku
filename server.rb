@@ -15,34 +15,17 @@ set :session_secret, "secure cookie"
 
 include ControlerLibrary
 
-def inspects
-    @current_solution.each_with_index {|row, index|
-      print row.to_s+' '
-      print "\n" if (index+1)%9==0
-    }
-end
-
 get '/' do
-  type =  params[:hard].nil? ? :hard : :easy
+  type = params.key?("hard") ? :hard : :easy
   reload = params.empty? ? false : true
   show_sudoku_puzzle(type, reload)
   erb :index
 end
 
-
-
 get '/restart' do
    @current_solution = session[:puzzle]
    session[:check_solution] = nil
    session[:current_solution] = session[:puzzle]
-   @solution = session[:solution]
-   @puzzle = session[:puzzle]
-   erb :index
-end
-
-get '/save' do
-   @current_solution = nil
-   session[:save_sudoku] = session[:puzzle]
    @solution = session[:solution]
    @puzzle = session[:puzzle]
    erb :index
@@ -60,6 +43,7 @@ post '/' do
   # so we need to transform it.
   redirect to("/?easy") if !params["easy"].nil?
   redirect to("/?hard") if !params["hard"].nil?
+  save_solution if !params["save_start"].nil?
   check_solution 
   redirect to("/")
 end

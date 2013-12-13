@@ -2,6 +2,32 @@ div.box, div.cell {
   display: inline-block;
 }
 
+li{
+   list-style: none;
+   text-align: left;
+   font-style: italic;
+   color: grey;
+}
+
+h1 {
+  font-size: 30px;
+  font-family: "Lucida Sans Typewriter";
+  font-style: italic;
+  font-weight: normal;
+}
+
+ul {
+  margin: auto;
+}
+.helper {
+  width: 450px;
+  text-align: center;
+  margin: auto;
+  border: 2px solid #d3d3d3;
+  background-color: #f3f3f3;
+  border-radius: 20px;
+}
+
 .border-box {
   border: 1px solid #000;
   display: block;

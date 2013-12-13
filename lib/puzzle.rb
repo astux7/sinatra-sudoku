@@ -11,7 +11,6 @@ class Puzzle
     choice = {:easy =>32, :mid=>46, :hard => 51}
     hide_cells(choice[type])
    # format_cells
-
   end
 
   def format_cells
@@ -32,29 +31,28 @@ class Puzzle
   def skipper
     sum = 0
     @solution.each{|el|
-      sum += el.to_i if el.to_i == 0
+      sum += 1  if el == 0
     }
     sum
   end
 
   def hide_cells(type)
 
-      500.times{
-      try = rand(81)-1
-      #puts try.to_s+ " --- "
-      if (make_column(try,type) && make_row(try,type) && @solution[try] != 0)
-        @solution[try] = 0 
-      
-      end
-      break if skipper >= type
+      1000.times{
+        try = rand(81)-1
+        if (make_column(try,type) && make_row(try,type) && @solution[try] != 0)
+          @solution[try] = 0 
+        end
+        break if skipper >= type
       }
+      puts skipper
 
       @solution
 
   end
 
    def make_column(cell,type)
-    element_count = (type/9)+1
+    element_count = (type/9)
     element_column, key, position_shift = 0, 0, (cell%9)
     0.upto(8) {|iter|
       key = (iter * 9) + position_shift
@@ -65,7 +63,7 @@ class Puzzle
   end
 
   def make_row(cell,type)
-     element_count = (type/9)
+    element_count = (type/9)
     element_column, key = 0, (cell/9)*9
     (key).upto(key+8) {|iter|
        element_column+=1 if @solution[key] == 0 
