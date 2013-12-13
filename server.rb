@@ -23,7 +23,8 @@ def inspects
 end
 
 get '/' do
-  show_sudoku_puzzle
+  type =  params[:hard].nil? ? :easy : :hard
+  show_sudoku_puzzle(type)
   erb :index
 end
 
@@ -56,8 +57,8 @@ post '/' do
   # However, our code expects it to be row by row, 
   # so we need to transform it.
   
-  redirect to("/solution") if !params["btn_solution"].nil?
-  redirect to("/restart") if !params["btn_restart"].nil?
+  redirect to("/?easy") if !params["easy"].nil?
+  redirect to("/?hard") if !params["hard"].nil?
   check_solution 
   redirect to("/")
 end

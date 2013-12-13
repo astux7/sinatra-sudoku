@@ -21,9 +21,10 @@ module ControlerLibrary
    end
   end
 
-  def show_sudoku_puzzle
-     
+  def show_sudoku_puzzle(type)
+    
     prepare_to_check_solution
+    
     generate_new_puzzle_if_necessary
     if !saved?
     @current_solution = session[:current_solution] || session[:puzzle]

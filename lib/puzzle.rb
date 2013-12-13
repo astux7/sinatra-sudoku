@@ -29,22 +29,27 @@ class Puzzle
 
   end
 
+  def skipper
+    sum = 0
+    @solution.each{|el|
+      sum += el.to_i if el.to_i == 0
+    }
+    sum
+  end
+
   def hide_cells(type)
-    skipper = false
-    type.times {
-     
-      25.times{
+
+      500.times{
       try = rand(81)-1
       #puts try.to_s+ " --- "
       if (make_column(try,type) && make_row(try,type) && @solution[try] != 0)
         @solution[try] = 0 
-        skipper = true
+      
       end
-      break if skipper
+      break if skipper >= type
       }
 
-    }
-    @solution
+      @solution
 
   end
 
@@ -60,7 +65,7 @@ class Puzzle
   end
 
   def make_row(cell,type)
-     element_count = (type/9)+1
+     element_count = (type/9)
     element_column, key = 0, (cell/9)*9
     (key).upto(key+8) {|iter|
        element_column+=1 if @solution[key] == 0 
