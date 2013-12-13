@@ -4,6 +4,4 @@ gem 'sinatra' # our web framework
 gem 'shotgun' # for live code reloading
 gem 'sinatra-partial'  #for split erb files to parts
 gem 'rack-flash3' #for showing flash messages for user
-configure :production do
-  require 'newrelic_rpm'
-end
+gem 'newrelic_rpm'
