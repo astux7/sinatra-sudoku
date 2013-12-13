@@ -21,11 +21,16 @@ module ControlerLibrary
    end
   end
 
-  def show_sudoku_puzzle(type)
-    
+  def show_sudoku_puzzle(type,reload)
+    if reload
+    session[:current_solution] = nil
+    session[:puzzle] = nil
+    session[:solution] = nil
+
+    end
     prepare_to_check_solution
     
-    generate_new_puzzle_if_necessary
+    generate_new_puzzle_if_necessary(type)
     if !saved?
     @current_solution = session[:current_solution] || session[:puzzle]
   else
@@ -52,17 +57,17 @@ module ControlerLibrary
   end
 
   # this method removes some digits from the solution to create a puzzle
-  def puzzle(sudoku)
+  def puzzle(sudoku,type)
     # this method is yours to implement
     puzz = Puzzle.new(sudoku.dup)
-    puzz.generate_puzzle(:easy)
+    puzz.generate_puzzle(type)
   end
 
-  def generate_new_puzzle_if_necessary
+  def generate_new_puzzle_if_necessary(type)
     return if session[:current_solution]
     sudoku = random_sudoku
     session[:solution] = sudoku
-    session[:puzzle] = puzzle(sudoku)
+    session[:puzzle] = puzzle(sudoku, type)
     session[:current_solution] = session[:puzzle]
   end
 

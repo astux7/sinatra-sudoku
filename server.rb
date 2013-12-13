@@ -23,10 +23,13 @@ def inspects
 end
 
 get '/' do
-  type =  params[:hard].nil? ? :easy : :hard
-  show_sudoku_puzzle(type)
+  type =  params[:hard].nil? ? :hard : :easy
+  reload = params.empty? ? false : true
+  show_sudoku_puzzle(type, reload)
   erb :index
 end
+
+
 
 get '/restart' do
    @current_solution = session[:puzzle]
@@ -39,7 +42,6 @@ end
 
 get '/save' do
    @current_solution = nil
-   
    session[:save_sudoku] = session[:puzzle]
    @solution = session[:solution]
    @puzzle = session[:puzzle]
@@ -56,7 +58,6 @@ post '/' do
   # so the form data (params['cell']) is sent using this order
   # However, our code expects it to be row by row, 
   # so we need to transform it.
-  
   redirect to("/?easy") if !params["easy"].nil?
   redirect to("/?hard") if !params["hard"].nil?
   check_solution 
